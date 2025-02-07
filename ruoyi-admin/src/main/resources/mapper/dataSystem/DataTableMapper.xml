@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.dataSystem.mapper.DataTableMapper">
+    
+    <resultMap type="DataTable" id="DataTableResult">
+        <result property="id"    column="id"    />
+        <result property="dataType"    column="data_type"    />
+        <result property="dataObject"    column="data_object"    />
+        <result property="dataQualityDescription"    column="data_quality_description"    />
+        <result property="sourceLink"    column="source_link"    />
+        <result property="websiteName"    column="website_name"    />
+        <result property="viewCount"    column="view_count"    />
+        <result property="downloadCount"    column="download_count"    />
+    </resultMap>
+
+    <sql id="selectDataTableVo">
+        select id, data_type, data_object, data_quality_description, source_link, website_name, view_count, download_count from data_table
+    </sql>
+
+    <select id="selectDataTableList" parameterType="DataTable" resultMap="DataTableResult">
+        <include refid="selectDataTableVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+            <if test="dataType != null  and dataType != ''"> and data_type like concat('%', #{dataType}, '%')</if>
+            <if test="dataObject != null  and dataObject != ''"> and data_object like concat('%', #{dataObject}, '%')</if>
+            <if test="dataQualityDescription != null  and dataQualityDescription != ''"> and data_quality_description like concat('%', #{dataQualityDescription}, '%')</if>
+            <if test="sourceLink != null  and sourceLink != ''"> and source_link like concat('%', #{sourceLink}, '%')</if>
+            <if test="websiteName != null  and websiteName != ''"> and website_name like concat('%', #{websiteName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataTableById" parameterType="Long" resultMap="DataTableResult">
+        <include refid="selectDataTableVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDataTable" parameterType="DataTable" useGeneratedKeys="true" keyProperty="id">
+        insert into data_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dataType != null">data_type,</if>
+            <if test="dataObject != null">data_object,</if>
+            <if test="dataQualityDescription != null">data_quality_description,</if>
+            <if test="sourceLink != null">source_link,</if>
+            <if test="websiteName != null">website_name,</if>
+            <if test="viewCount != null">view_count,</if>
+            <if test="downloadCount != null">download_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dataType != null">#{dataType},</if>
+            <if test="dataObject != null">#{dataObject},</if>
+            <if test="dataQualityDescription != null">#{dataQualityDescription},</if>
+            <if test="sourceLink != null">#{sourceLink},</if>
+            <if test="websiteName != null">#{websiteName},</if>
+            <if test="viewCount != null">#{viewCount},</if>
+            <if test="downloadCount != null">#{downloadCount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataTable" parameterType="DataTable">
+        update data_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="dataObject != null">data_object = #{dataObject},</if>
+            <if test="dataQualityDescription != null">data_quality_description = #{dataQualityDescription},</if>
+            <if test="sourceLink != null">source_link = #{sourceLink},</if>
+            <if test="websiteName != null">website_name = #{websiteName},</if>
+            <if test="viewCount != null">view_count = #{viewCount},</if>
+            <if test="downloadCount != null">download_count = #{downloadCount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDataTableById" parameterType="Long">
+        delete from data_table where id = #{id}
+    </delete>
+
+    <delete id="deleteDataTableByIds" parameterType="String">
+        delete from data_table where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
