@@ -43,6 +43,7 @@
             <h4>后端技术</h4>
             <ul>
               <li>SpringBoot</li>
+              <li>Neo4j</li>
               <li>Spring Security</li>
               <li>JWT</li>
               <li>MyBatis</li>
@@ -94,6 +95,13 @@
             <span>更新日志</span>
           </div>
           <el-collapse accordion>
+
+            <el-collapse-item title="v1.1.0 - 2025-3-9">
+              <ol>
+                <li>增加了数据智能问答功能,支持本地数据库的查询。</li>
+              </ol>
+            </el-collapse-item>
+
             <el-collapse-item title="v1.0.0 - 2025-2-8">
               <ol>
                 <li>大数据分析平台正式发布！</li>
@@ -129,7 +137,7 @@ export default {
   data() {
     return {
       // 版本号
-      version: "1.0.0"
+      version: "1.1.0"
     };
   },
   methods: {

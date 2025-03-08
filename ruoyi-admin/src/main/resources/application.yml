@@ -127,3 +127,9 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+# Neo4j配置
+neo4j:
+  uri: bolt://localhost:7687
+  username: neo4j
+  password: ccf3505211531

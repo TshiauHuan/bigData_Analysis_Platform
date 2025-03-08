@@ -87,7 +87,19 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
-  }
+  },
+  {
+    path: '/system/dataqa',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/system/dataqa/index'),
+        name: 'DataQa',
+        meta: { title: '数据智能问答', icon: 'message' }
+      }
+    ]
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载
@@ -161,7 +173,7 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
-  }
+  },
 ]
 
 // 防止连续点击多次路由报错
